@@ -11,6 +11,7 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const header = document.querySelector('.header');
+const allSelection = document.querySelectorAll('.section');
 
 
 const navHeight = nav.getBoundingClientRect().height;
@@ -33,3 +34,26 @@ btnScrollTo.addEventListener('click', function (e) {
     const s1coords = section1.getBoundingClientRect();
     section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+    if (e.target.classList.contains('nav__link')) {
+      const id = e.target.getAttribute('href');
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+ 
+  const revealSection = function (entries, observer) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+  };
+  
+  const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.15,
+  });
+  allSelection.forEach(function (section) {
+    sectionObserver.observe(section);
+  });
