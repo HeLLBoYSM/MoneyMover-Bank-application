@@ -33,3 +33,10 @@ btnScrollTo.addEventListener('click', function (e) {
     const s1coords = section1.getBoundingClientRect();
     section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+    if (e.target.classList.contains('nav__link')) {
+      const id = e.target.getAttribute('href');
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
