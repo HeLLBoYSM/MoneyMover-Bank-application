@@ -28,3 +28,8 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+btnScrollTo.addEventListener('click', function (e) {
+    const s1coords = section1.getBoundingClientRect();
+    section1.scrollIntoView({ behavior: 'smooth' });
+});
